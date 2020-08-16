@@ -49,11 +49,10 @@ Scalable video coding (SVC) technology allows each participant to get the pictur
 
 # Lets get technical 
 ## TCP? UDP? Both!!
-![](assets/tcpudp.JPG)
-
-![](assets/tcpudp1.jpg)
 
 ![](assets/part0.png)
+
+![](assets/tcpudp1.jpg)
 
 Unlike TCP, in UDP there is no requirement to form a connection. As long as the devices are aware of each other’s public IP address, they can talk via peer to peer connection. Also, as it is known, UDP is a lossy protocol, which means there is no concept of acknowledgment in UDP. If the sender sends packets P1, P2, P3, and P4 but the receiver only receives packets P1, P3, and P4, the sender won’t bother sending P2 again i.e. there might be some data loss.
 UDP is fast
