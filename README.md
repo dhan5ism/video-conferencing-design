@@ -1,6 +1,6 @@
 # video-conferencing-design
-Software design for Video conferencing application such as Zoom, webex, whatspp
-Let us discuss the design.
+Software design for Video conferencing application such as Zoom, webex, whatspp. Let us discuss the design.
+
 ![](assets/devices.jpg)
 
 First things first, let’s lock down the requirements.
@@ -51,7 +51,7 @@ Scalable video coding (SVC) technology allows each participant to get the pictur
 ## TCP? UDP? Both!!
 ![](assets/tcpudp1.jpg)
 
-Unlike TCP, in UDP there is no requirement to form a connection. As long as the devices are aware of each other’s public IP address, they can talk via peer to peer connection. Also, as mentioned above, UDP is a lossy protocol, which means there is no concept of acknowledgment in UDP. If the sender sends packets P1, P2, P3, and P4 but the receiver only receives packets P1, P3, and P4, the sender won’t bother sending P2 again i.e. there might be some data loss.
+Unlike TCP, in UDP there is no requirement to form a connection. As long as the devices are aware of each other’s public IP address, they can talk via peer to peer connection. Also, as it is known, UDP is a lossy protocol, which means there is no concept of acknowledgment in UDP. If the sender sends packets P1, P2, P3, and P4 but the receiver only receives packets P1, P3, and P4, the sender won’t bother sending P2 again i.e. there might be some data loss.
 UDP is fast
 
 ![](assets/tcpudp2.jpg)
