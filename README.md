@@ -49,5 +49,7 @@ Scalable video coding (SVC) technology allows each participant to get the pictur
 # Lets get technical 
 ## TCP? UDP? Both!!
 ![](assets/tcpudp1.jpg)
+
 UDP is fast
+
 ![](Fig2_UDPwork.jpg)
