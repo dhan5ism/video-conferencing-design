@@ -93,3 +93,8 @@ When Kafka receives an event that call has been disconnected, File creator will 
 # How intelligent is the client?
 This is the next big question. Exactly what operations can the client perform independently? Going back to the U1-U2 video call, we know that our clients are smart enough to know their limitations like bandwidth, bitrate, resolution, etc, and communicate to the other party and come up with a configuration for the call that works for both of them. Now let’s say while U1 and U2 are in a peer to peer call, U1’s public IP keeps changing or the call keeps getting dropped. In such a case our clients will be smart enough to mutually decide that their p-to-p connection is not working and they need to move to the call server model. This will all happen at run time. Also, this switch won’t necessarily happen at the same time. U1 could be sending messages to U2 directly and U2 could be sent through the call server. Even in a group call, the same flow will apply.
 
+# References
+https://www.codekarle.com/system-design/Zoom-system-design.html
+https://www.codekarle.com/system-design/Whatsapp-system-design.html
+https://www.youtube.com/watch?v=G32ThJakeHk
+https://trueconf.com/blog/reviews-comparisons/videoconferencing-systems-architecture.html
