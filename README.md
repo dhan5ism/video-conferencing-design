@@ -24,6 +24,7 @@ Hardware solutions are often based on modules with DSP-processors to support mas
 Work Principles of Classical Hardware Video Conferencing Server
 
 MCU (Multipoint Control Unit) accepts video streams from each terminal, decodes and mixes them into one stream, then it encodes and sends the stream to each endpoint.
+
 ![](assets/mcu-endpoints.png)
 
 ## Architecture of Software Video Conferencing Solutions
@@ -62,15 +63,14 @@ Now let us understand exactly how the whole video call will take place with an e
 Establishing the UDP connection requires the public IP addresses of both parties.
 
 ![](assets/zoom_webRTC.png)
+
 Refer to this diagram, we will understand with this example of how the private IP address will be used to find the public IP address of the device. Suppose we have D1, D2, and D2 connected to a series of routers which in the end have a router with a public IP address and a NAT in the same layer. Let’s say the public IP address of this router is A.B.C.D and devices D1, D2 and D3 are connected at ports P1, P2, and P3 respectively. So when D1 connects to our connector, as far as the connector is concerned, a request is coming from A.B.C.D: P1 which becomes the public address of D1 and it will respond to D1 with public IP address A.B.C.D: P1. In this manner, U1 and U2 will get three public IPs from the connector and then communicate it to each other using the Web socket handler.
 
-##Comlexity and WebRTC
-Now at this stage, we haven’t considered some very common and expected scenarios. Suppose U1 is on 5G network and can support HD videos but U2 is on 2G network and HD videos will considerably slow down the communication. So it makes no sense for U2 to receive videos in HD format. So how will U1 and U2 sort out these minor details like device resolution, network bandwidth, etc? Along with sharing their public IPs, U1 and U2 will also share these other attributes like bandwidth they are on, codecs, number of pixels the devices can support, etc, and decide on a configuration that supports the device with minimum capability in each category. For example, if U2 is on a lower bandwidth they will support a lower bandwidth, if U1 is on a device with the low resolution they will support a lower resolution etc. These attributes are also communicated via the web socket handler. After this, the actual call will begin which will just be a stream of data packets flowing between the two IP addresses. At this point, each device will act as a sender as well as a receiver and will be smart enough to render the data they receive.
+## Comlexity and WebRTC
+- Devices can be on different bandwidth
+- A public IP may also change during the call.
+- Bandwidth is dynamic.
+- Need a smart client.
 
-Now there is one more thing that can go wrong here. Remember that Router + NAT layer in our previous diagram? Usually, that layer also has a Firewall. And some Firewalls don’t allow UDP traffic to pass. In this case, the communication will have to move to a TCP connection. Also, we have something called a symmetric NAT. If we have a symmetric NAT in this layer, it will allow only the connector to talk to the port connected to the device. Now say U1 was device D1 and U2 was device D2, when U1 tried to connect to P2 the firewall would block that connection saying only the connector can communicate with this port. Did our whole solution just go down the drain?
+Here we will introduce something called Call Server between U1 and U2. Call servers can do the job of a connector as well as facilitate data transfer. Now the ports for U1 and U2 will be identified by the call server and from then on it will start acting as an intermediate between U1 and U2. U1 will send its data to be forwarded to U2 and U2 will communicate with U1 in a similar fashion. This whole process or protocol is known as WebRTC.
 
-Well not really. Here we will introduce something called Call Server between U1 and U2. Call servers can do the job of a connector as well as facilitate data transfer. Now the ports for U1 and U2 will be identified by the call server and from then on it will start acting as an intermediate between U1 and U2. U1 will send its data to be forwarded to U2 and U2 will communicate with U1 in a similar fashion. This whole process or protocol is known as WebRTC.
-
-The handshaking that was done by the web socket handler is known as Signaling. Our connector in WebRTC terminology is known as the STUN Server and the call server is known as the TURN Server.Group video calls
-
-Ok so now we know how 1-to-1 video calls work. Are group video calls the same? Well Yes and No. Members of a group video call will interact in a similar manner but it will follow a more hybrid approach.
