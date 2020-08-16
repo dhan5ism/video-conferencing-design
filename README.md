@@ -95,6 +95,10 @@ This is the next big question. Exactly what operations can the client perform in
 
 # References
 https://www.codekarle.com/system-design/Zoom-system-design.html
+
 https://www.codekarle.com/system-design/Whatsapp-system-design.html
+
 https://www.youtube.com/watch?v=G32ThJakeHk
+
 https://trueconf.com/blog/reviews-comparisons/videoconferencing-systems-architecture.html
+
